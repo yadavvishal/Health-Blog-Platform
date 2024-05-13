@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block title %} Profile {% endblock %}
+<!--..This comment is for solving  the error  of endblock.-->
+{% block add_blogs_active %} active {% endblock %} {% block css %}
+<!--..This comment is for solving  the error  of endblock.-->
+{% endblock %}
+<!--..This comment is for solving  the error  of endblock.-->
+{% block body %}
+<form action="/add_blogs/" enctype="multipart/form-data" method="POST">
+  {% csrf_token %}
+  <div class="container mt-4">
+    {{ form.as_p }}
+    <button class="btn btn-primary">Add Blog</button>
+  </div>
+</form>
+
+<!--..Yha se update kr rhe hai add blogs html ko.-->
+{% if form.errors %}
+<div class="alert alert-danger">
+  <strong>Error!</strong> Please correct the following errors:<br />
+  {% for field, errors in form.errors.items %} {{ field|title }}: {{
+  errors|join:", " }}<br />
+  {% endfor %}
+</div>
+{% endif %} {% endblock %} {% block js %}
+<script>
+  {% if alert %}
+  alert('Your Blog is added successfully.');
+  document.location = '/';
+  {% endif %}
+</script>
+{% endblock %}
